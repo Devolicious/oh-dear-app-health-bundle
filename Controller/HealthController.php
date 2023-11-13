@@ -16,7 +16,7 @@ final class HealthController
 
     public function __invoke(): JsonResponse
     {
-        $checkResults = $this->healthChecker->runAllChecks();
+        $checkResults = $this->healthChecker->fetchLatestCheckResults();
 
         return new JsonResponse(
             $checkResults->toJson(),

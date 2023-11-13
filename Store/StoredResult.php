@@ -19,6 +19,6 @@ final class StoredResult
 
     public function isExpired(int $frequency): bool
     {
-        return $this->createdAt->getTimestamp() + $frequency > time();
+        return $this->createdAt->getTimestamp() + $frequency < time();
     }
 }
