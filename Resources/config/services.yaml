@@ -6,4 +6,18 @@ services:
         tags:
             - { name: 'controller.service_arguments' }
 
-    Devolicious\OhDearAppHealthBundle\HealthChecker: ~
+    Devolicious\OhDearAppHealthBundle\Command\HealthCheckCommand:
+        arguments:
+            - '@Devolicious\OhDearAppHealthBundle\HealthChecker'
+        tags:
+            - { name: 'console.command' }
+
+    Devolicious\OhDearAppHealthBundle\HealthChecker:
+        arguments:
+            - '@Devolicious\OhDearAppHealthBundle\Store\RequestStore'
+
+    Devolicious\OhDearAppHealthBundle\Store\CachePoolStore:
+        arguments:
+            - '@cache.app'
+
+    Devolicious\OhDearAppHealthBundle\Store\RequestStore: '@Devolicious\OhDearAppHealthBundle\Store\CachePoolStore'
