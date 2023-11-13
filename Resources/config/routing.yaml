@@ -1,0 +1,4 @@
+_devolicious_health:
+    path: /health-check
+    defaults: { _controller: Devolicious\OhDearAppHealthBundle\Controller\HealthController }
+    methods: [GET, HEAD]

@@ -1,0 +1,9 @@
+services:
+    Devolicious\OhDearAppHealthBundle\Controller\HealthController:
+        arguments:
+            - '@Devolicious\OhDearAppHealthBundle\HealthChecker'
+        public: true
+        tags:
+            - { name: 'controller.service_arguments' }
+
+    Devolicious\OhDearAppHealthBundle\HealthChecker: ~
