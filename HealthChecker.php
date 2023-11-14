@@ -9,7 +9,6 @@ use Devolicious\OhDearAppHealthBundle\Store\ResultStore;
 use Devolicious\OhDearAppHealthBundle\Store\StoredResult;
 use OhDear\HealthCheckResults\CheckResult;
 use OhDear\HealthCheckResults\CheckResults;
-use function dump;
 
 final class HealthChecker
 {
