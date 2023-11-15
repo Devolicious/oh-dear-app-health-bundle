@@ -15,6 +15,14 @@ final class OhDearAppHealthExtension extends Extension
      */
     public function load(array $configs, ContainerBuilder $container): void
     {
+        $configuration = new Configuration();
+        $config = $this->processConfiguration($configuration, $configs);
+
+        $container->setParameter(
+            'oh_dear_app_health.secret',
+            $config['secret']
+        );
+
         $yamlLoader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $yamlLoader->load('services.yaml');
     }

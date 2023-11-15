@@ -2,6 +2,7 @@ services:
     Devolicious\OhDearAppHealthBundle\Controller\HealthController:
         arguments:
             - '@Devolicious\OhDearAppHealthBundle\HealthChecker'
+            - '%oh_dear_app_health.secret%'
         public: true
         tags:
             - { name: 'controller.service_arguments' }
