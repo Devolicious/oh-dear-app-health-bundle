@@ -2,11 +2,7 @@ parameters:
     grumphp.ignore_patterns:
         - '*/vendor'
         - 'bin'
-        - 'custom/plugins'
-        - 'public'
-        - 'tests'
-        - 'var'
-        - 'src/Command'
+        - 'Tests'
 
 grumphp:
     stop_on_failure: false
@@ -45,8 +41,6 @@ grumphp:
                 - 'var_dump('
                 - '__debug('
                 - 'is_null('
-            whitelist_patterns:
-                - /^public/(.*)
             triggered_by: [php,js]
         file_size:
             max_size: 5M
