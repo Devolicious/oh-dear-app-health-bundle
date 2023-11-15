@@ -11,7 +11,7 @@ use Devolicious\OhDearAppHealthBundle\Store\StoredResult;
 use OhDear\HealthCheckResults\CheckResult;
 use OhDear\HealthCheckResults\CheckResults;
 
-final class HealthChecker
+final class HealthChecker implements HealthCheckerInterface
 {
     /** @var array<CheckerInterface> */
     private array $checkers = [];
