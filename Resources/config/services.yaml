@@ -16,6 +16,12 @@ services:
         arguments:
             - '@Devolicious\OhDearAppHealthBundle\Store\RequestStore'
 
+    Devolicious\OhDearAppHealthBundle\Checker\DatabaseChecker:
+        arguments:
+            - '@doctrine.orm.default_entity_manager'
+        tags:
+            - { name: 'oh_dear_app_health.checker' }
+
     Devolicious\OhDearAppHealthBundle\Store\CachePoolStore:
         arguments:
             - '@cache.app'
