@@ -35,7 +35,7 @@ final class HealthChecker
             $lastResult = null;
             $result = null;
 
-            if (0 > $checker->frequency()) {
+            if (0 < $checker->frequency()) {
                 $lastResult = $this->resultStore->fetchLastResult($checker->identify());
                 $result = $lastResult?->checkResult;
             }
