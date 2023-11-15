@@ -7,13 +7,18 @@ namespace Devolicious\OhDearAppHealthBundle\Tests\Unit\Store;
 use Devolicious\OhDearAppHealthBundle\Store\CachePoolStore;
 use Devolicious\OhDearAppHealthBundle\Store\StoredResult;
 use OhDear\HealthCheckResults\CheckResult;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Psr\Cache\CacheItemPoolInterface;
 use Symfony\Contracts\Cache\ItemInterface;
 
 final class CachePoolStoreTest extends TestCase
 {
-    private CacheItemPoolInterface $cache;
+    /** @var MockObject<CacheItemPoolInterface> */
+    /** @phpstan-ignore-next-line */
+    private MockObject $cache;
+
+    /** @phpstan-ignore-next-line */
     private CachePoolStore $store;
 
     protected function setUp(): void
