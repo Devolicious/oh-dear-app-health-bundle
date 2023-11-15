@@ -37,6 +37,8 @@
             <directory>./vendor</directory>
             <directory>./Tests</directory>
             <directory>./DependencyInjection</directory>
+            <file>./OhDearAppHealthBundle.php</file>
+            <file>./.php-cs-fixer.php</file>
         </exclude>
         <report>
             <html outputDirectory="Tests/_html-coverage" lowUpperBound="50" highLowerBound="90"/>

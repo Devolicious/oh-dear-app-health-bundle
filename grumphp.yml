@@ -14,18 +14,6 @@ grumphp:
             PHP_CS_FIXER_IGNORE_ENV: "1"
     tasks:
         # Git
-        git_commit_message:
-            allow_empty_message: false
-            enforce_capitalized_subject: false
-            enforce_no_subject_trailing_period: true
-            enforce_single_lined_subject: false
-            additional_modifiers: ''
-            case_insensitive: true
-            multiline: true
-            max_subject_width: 120
-            max_body_width: 90
-            matchers:
-                - /^SGA+|^Merge+|^Internal+|^Improvements+|^BUGFIX+|^HOTFIX+/
         git_blacklist:
             match_word: true
             keywords:
