@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Devolicious\OhDearAppHealthBundle\Controller;
 
-use Devolicious\OhDearAppHealthBundle\HealthChecker;
+use Devolicious\OhDearAppHealthBundle\HealthCheckerInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -14,7 +14,7 @@ final class HealthController
     public const OH_DEAR_HEADER = 'oh-dear-health-check-secret';
 
     public function __construct(
-        private readonly HealthChecker $healthChecker,
+        private readonly HealthCheckerInterface $healthChecker,
         private readonly string $secret,
     ) {
     }
