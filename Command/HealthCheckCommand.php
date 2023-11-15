@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Devolicious\OhDearAppHealthBundle\Command;
 
 use Devolicious\OhDearAppHealthBundle\HealthChecker;
@@ -12,7 +14,7 @@ use Symfony\Component\Console\Output\OutputInterface;
     name: 'health:check',
     description: 'Run all health checks',
 )]
-class HealthCheckCommand extends Command
+final class HealthCheckCommand extends Command
 {
     public function __construct(
         private readonly HealthChecker $healthChecker,

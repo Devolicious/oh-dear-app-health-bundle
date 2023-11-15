@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Devolicious\OhDearAppHealthBundle;
@@ -55,7 +56,7 @@ final class HealthChecker
                 $result->status = CheckResult::STATUS_WARNING;
                 $result->meta = [
                     ...$result->meta,
-                    "Last check was more than {$checker->frequency()} seconds ago"
+                    "Last check was more than {$checker->frequency()} seconds ago",
                 ];
             }
 

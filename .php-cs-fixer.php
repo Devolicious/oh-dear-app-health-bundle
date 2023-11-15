@@ -8,6 +8,9 @@ $config
             ->in([
                 __DIR__,
             ])
+            ->exclude([
+                __DIR__ . '/vendor',
+            ])
             ->name('*.php')
     )
     ->setRiskyAllowed(true)

@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Devolicious\OhDearAppHealthBundle\Checker;
@@ -12,9 +13,7 @@ interface CheckerInterface
     public function identify(): string;
 
     /**
-     * How often should this check be run in seconds
-     *
-     * @return int
+     * How often should this check be run in seconds.
      */
     public function frequency(): int;
 }

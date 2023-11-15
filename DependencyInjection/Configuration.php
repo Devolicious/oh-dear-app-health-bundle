@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Devolicious\OhDearAppHealthBundle\DependencyInjection;
@@ -15,9 +16,8 @@ final class Configuration implements ConfigurationInterface
 
         $rootNode
             ->children()
-                ->scalarNode('secret')->isRequired()->cannotBeEmpty()->end()
-            ->end()
-        ;
+            ->scalarNode('secret')->isRequired()->cannotBeEmpty()->end()
+            ->end();
 
         return $treeBuilder;
     }

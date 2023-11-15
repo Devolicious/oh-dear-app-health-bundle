@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Devolicious\OhDearAppHealthBundle\DependencyInjection\Compiler;
@@ -8,7 +9,7 @@ use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Reference;
 
-class CheckerPass implements CompilerPassInterface
+final class CheckerPass implements CompilerPassInterface
 {
     public function process(ContainerBuilder $container): void
     {
