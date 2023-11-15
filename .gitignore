@@ -9,6 +9,7 @@
 .env
 .idea/
 clover.xml
+Tests/_html-coverage/
 
 ###> friendsofphp/php-cs-fixer ###
 /.php-cs-fixer.cache
@@ -17,4 +18,5 @@ clover.xml
 ###> phpunit/phpunit ###
 /phpunit.xml
 .phpunit.result.cache
+.phpunit.cache/
 ###< phpunit/phpunit ###

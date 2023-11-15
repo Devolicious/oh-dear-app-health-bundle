@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace Devolicious\OhDearAppHealthBundle\Store;
 
-use Symfony\Component\Cache\Adapter\AdapterInterface;
+use Psr\Cache\CacheItemPoolInterface;
 
 final class CachePoolStore implements ResultStore
 {
     public function __construct(
-        private readonly AdapterInterface $cache,
+        private readonly CacheItemPoolInterface $cache,
     ) {
     }
 
