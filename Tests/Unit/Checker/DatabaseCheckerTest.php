@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Devolicious\OhDearAppHealthBundle\Tests\Unit\Checker;
 
 use Devolicious\OhDearAppHealthBundle\Checker\CheckerInterface;
-use Devolicious\OhDearAppHealthBundle\Checker\DatabaseChecker;
+use Devolicious\OhDearAppHealthBundle\Checker\DoctrineConnectionChecker;
 use Doctrine\DBAL\Connection;
 use Doctrine\ORM\EntityManagerInterface;
 use Exception;
@@ -25,7 +25,7 @@ final class DatabaseCheckerTest extends TestCase
     protected function setUp(): void
     {
         $this->entityManager = $this->createMock(EntityManagerInterface::class);
-        $this->checker = new DatabaseChecker($this->entityManager);
+        $this->checker = new DoctrineConnectionChecker($this->entityManager);
 
         parent::setUp();
     }

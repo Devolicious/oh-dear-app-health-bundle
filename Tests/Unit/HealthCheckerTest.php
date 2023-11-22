@@ -279,4 +279,32 @@ final class HealthCheckerTest extends TestCase
 
         $this->healthChecker->runAllChecksAndStore();
     }
+
+    /**
+     * @test
+     */
+    public function run_all_checks_and_store_omit_cache(): void
+    {
+        $checkResult = $this->createMock(CheckResult::class);
+        $storedResult = new StoredResult('identifier', $checkResult);
+
+        $this->resultStore
+            ->expects($this->once())
+            ->method('fetchLastResult')
+            ->willReturn($storedResult);
+
+        $this->checker
+            ->expects($this->never())
+            ->method('frequency');
+
+        $this->checker
+            ->expects($this->once())
+            ->method('runCheck');
+
+        $this->resultStore
+            ->expects($this->once())
+            ->method('save');
+
+        $this->healthChecker->runAllChecksAndStore(true);
+    }
 }

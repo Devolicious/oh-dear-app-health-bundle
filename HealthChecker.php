@@ -79,7 +79,7 @@ final class HealthChecker implements HealthCheckerInterface
         return $checkResults;
     }
 
-    public function runAllChecksAndStore(bool $omitCache): void
+    public function runAllChecksAndStore(bool $omitCache = false): void
     {
         foreach ($this->checkers as $checker) {
             $lastResult = $this->resultStore->fetchLastResult($checker->identify());
