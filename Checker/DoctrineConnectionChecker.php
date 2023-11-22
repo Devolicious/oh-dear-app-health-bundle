@@ -9,18 +9,19 @@ use Exception;
 use OhDear\HealthCheckResults\CheckResult;
 use Throwable;
 
-final class DatabaseChecker implements CheckerInterface
+final class DoctrineConnectionChecker implements CheckerInterface
 {
     private const IDENTIFIER = 'Database';
 
     public function __construct(
         private readonly EntityManagerInterface $entityManager,
+        public readonly string $identifier = self::IDENTIFIER,
     ) {
     }
 
     public function identify(): string
     {
-        return self::IDENTIFIER;
+        return $this->identifier;
     }
 
     public function frequency(): int
@@ -31,7 +32,7 @@ final class DatabaseChecker implements CheckerInterface
     public function runCheck(): CheckResult
     {
         $result = new CheckResult(
-            name: self::IDENTIFIER,
+            name: $this->identifier,
             label: 'Database connection status',
             shortSummary: 'connected',
             status: CheckResult::STATUS_OK,

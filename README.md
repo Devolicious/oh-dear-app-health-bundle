@@ -58,11 +58,45 @@ will run and by default it will be stored in the default cache pool. You can cha
 ```yaml
 services:
     ...
-    # default configuration
+    # default configuration (already configured in the bundle)
     Devolicious\OhDearAppHealthBundle\Store\RequestStore: '@Devolicious\OhDearAppHealthBundle\Store\CachePoolStore'
 
     # custom configuration
     Devolicious\OhDearAppHealthBundle\Store\RequestStore: '@App\Store\MyCustomStore'
 ```
 
-Within each checker you can define the frequency of how often the check should be executed.
+Within each checker you can define the frequency of how often the check should be executed in seconds.
+
+## Built-in checkers
+### DoctrineDatabaseChecker
+
+This checker is included in the library. It is not enabled by default as you might not need it or you are using a different database configuration.
+It also enables to reuse the checker when having multiple database connections. Assuming you have added the `_instanceof` configuration as described above, you can add the following to your `services.yaml` file:
+
+```yaml
+# config/services.yaml
+services:
+    ...
+    # Example for simple setup with 1 database connection and autowire enabled
+    Devolicious\OhDearAppHealthBundle\Checker\DoctrineConnectionChecker: ~
+```
+
+If you have multiple database connections, you can add the following to your `services.yaml` file:
+```yaml
+# config/services.yaml
+services:
+    ...
+    # Example for default connection with MySQL
+    app.mysql_database_checker:
+        class: Devolicious\OhDearAppHealthBundle\Checker\DoctrineConnectionChecker
+        arguments:
+            - '@doctrine.orm.default_entity_manager'
+            - 'MySQL Database' #optional, defaults to 'Database'
+
+    # Example for an extra connection with a MSSQL database
+    app.mssql_database_checker:
+        class: Devolicious\OhDearAppHealthBundle\Checker\DoctrineConnectionChecker
+        arguments:
+            - '@doctrine.orm.mssql_entity_manager'
+            - 'MSSQL Database' #optional, defaults to 'Database'
+```
