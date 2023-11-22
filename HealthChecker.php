@@ -79,12 +79,12 @@ final class HealthChecker implements HealthCheckerInterface
         return $checkResults;
     }
 
-    public function runAllChecksAndStore(): void
+    public function runAllChecksAndStore(bool $omitCache): void
     {
         foreach ($this->checkers as $checker) {
             $lastResult = $this->resultStore->fetchLastResult($checker->identify());
 
-            if (null !== $lastResult && false === $lastResult->isExpired($checker->frequency())) {
+            if (false === $omitCache && null !== $lastResult && false === $lastResult->isExpired($checker->frequency())) {
                 continue;
             }
 

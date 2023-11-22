@@ -15,5 +15,5 @@ interface HealthCheckerInterface
 
     public function runAllChecks(): CheckResults;
 
-    public function runAllChecksAndStore(): void;
+    public function runAllChecksAndStore(bool $omitCache): void;
 }
