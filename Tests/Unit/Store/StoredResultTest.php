@@ -28,7 +28,7 @@ final class StoredResultTest extends TestCase
     {
         $checkResult = $this->createMock(CheckResult::class);
         $result = new StoredResult('identifier', $checkResult);
-        $this->assertTrue($result->isExpired(-1, self::THRESHOLD));
+        $this->assertFalse($result->isExpired(-1, self::THRESHOLD));
     }
 
     /**

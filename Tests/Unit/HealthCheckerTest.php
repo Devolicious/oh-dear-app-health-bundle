@@ -170,6 +170,44 @@ final class HealthCheckerTest extends TestCase
         $this->checker
             ->expects($this->exactly(3))
             ->method('frequency')
+            ->willReturnOnConsecutiveCalls(3600, -61, 3600);
+
+        $results = $this->healthChecker->fetchLatestCheckResults();
+
+        $this->assertCount(1, $results->checkResults());
+        $this->assertEquals($checkResult, $results->checkResults()[0]);
+    }
+
+    /**
+     * @test
+     */
+    public function fetch_latest_check_results_with_expired_cache_within_threshold(): void
+    {
+        $checkResult = $this->createMock(CheckResult::class);
+        $checkResult->meta = [];
+
+        $storedResult = new StoredResult('identifier', $checkResult);
+
+        $this->resultStore
+            ->expects($this->once())
+            ->method('fetchLastResult')
+            ->willReturn($storedResult);
+
+        $this->checker
+            ->expects($this->never())
+            ->method('runCheck');
+
+        $this->resultStore
+            ->expects($this->never())
+            ->method('save');
+
+        $this->checker
+            ->expects($this->exactly(1))
+            ->method('identify');
+
+        $this->checker
+            ->expects($this->exactly(2))
+            ->method('frequency')
             ->willReturnOnConsecutiveCalls(3600, -1, 3600);
 
         $results = $this->healthChecker->fetchLatestCheckResults();
