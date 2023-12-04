@@ -11,3 +11,10 @@ jobs:
             - uses: php-actions/composer@v6
             - uses: php-actions/phpstan@v3
             - uses: php-actions/phpunit@v3
+              env:
+                XDEBUG_MODE: coverage
+              with:
+                bootstrap: vendor/autoload.php
+                configuration: phpunit.xml
+                php_extensions: xdebug
+                args: tests --coverage-clover ./coverage.xml
