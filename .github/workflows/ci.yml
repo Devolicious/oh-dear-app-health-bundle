@@ -1,0 +1,20 @@
+name: CI
+
+on: [push]
+
+jobs:
+    build-test:
+        runs-on: ubuntu-latest
+
+        steps:
+            - uses: actions/checkout@v3
+            - uses: php-actions/composer@v6
+            - uses: php-actions/phpstan@v3
+            - uses: php-actions/phpunit@v3
+              env:
+                XDEBUG_MODE: coverage
+              with:
+                bootstrap: vendor/autoload.php
+                configuration: phpunit.xml.dist
+                php_extensions: xdebug
+                args: Tests --coverage-clover ./coverage.xml

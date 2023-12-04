@@ -17,6 +17,7 @@ final class Configuration implements ConfigurationInterface
         $rootNode
             ->children()
             ->scalarNode('secret')->isRequired()->cannotBeEmpty()->end()
+            ->integerNode('expiration_threshold')->defaultValue(60)->end()
             ->end();
 
         return $treeBuilder;

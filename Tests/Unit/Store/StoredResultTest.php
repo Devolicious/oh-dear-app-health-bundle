@@ -10,6 +10,7 @@ use PHPUnit\Framework\TestCase;
 
 final class StoredResultTest extends TestCase
 {
+    private const THRESHOLD = 60;
     /**
      * @test
      */
@@ -17,7 +18,17 @@ final class StoredResultTest extends TestCase
     {
         $checkResult = $this->createMock(CheckResult::class);
         $result = new StoredResult('identifier', $checkResult);
-        $this->assertFalse($result->isExpired(60));
+        $this->assertFalse($result->isExpired(60, self::THRESHOLD));
+    }
+
+    /**
+     * @test
+     */
+    public function result_is_expired_but_falls_into_threshold(): void
+    {
+        $checkResult = $this->createMock(CheckResult::class);
+        $result = new StoredResult('identifier', $checkResult);
+        $this->assertFalse($result->isExpired(-1, self::THRESHOLD));
     }
 
     /**
@@ -27,6 +38,6 @@ final class StoredResultTest extends TestCase
     {
         $checkResult = $this->createMock(CheckResult::class);
         $result = new StoredResult('identifier', $checkResult);
-        $this->assertTrue($result->isExpired(-1));
+        $this->assertTrue($result->isExpired(-61, self::THRESHOLD));
     }
 }

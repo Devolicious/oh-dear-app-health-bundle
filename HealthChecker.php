@@ -17,7 +17,8 @@ final class HealthChecker implements HealthCheckerInterface
     private array $checkers = [];
 
     public function __construct(
-        private readonly ResultStore $resultStore
+        private readonly ResultStore $resultStore,
+        private readonly int $expirationThreshold,
     ) {
     }
 
@@ -52,7 +53,7 @@ final class HealthChecker implements HealthCheckerInterface
                 );
             }
 
-            if (true === ($lastResult?->isExpired($checker->frequency()) ?? false)) {
+            if (true === ($lastResult?->isExpired($checker->frequency(), $this->expirationThreshold) ?? false)) {
                 $result->status = CheckResult::STATUS_WARNING;
                 $result->meta = [
                     ...$result->meta,
@@ -84,7 +85,7 @@ final class HealthChecker implements HealthCheckerInterface
         foreach ($this->checkers as $checker) {
             $lastResult = $this->resultStore->fetchLastResult($checker->identify());
 
-            if (false === $omitCache && null !== $lastResult && false === $lastResult->isExpired($checker->frequency())) {
+            if (false === $omitCache && null !== $lastResult && false === $lastResult->isExpired($checker->frequency(), 0)) {
                 continue;
             }
 

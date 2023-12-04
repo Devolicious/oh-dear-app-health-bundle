@@ -16,6 +16,7 @@ services:
     Devolicious\OhDearAppHealthBundle\HealthChecker:
         arguments:
             - '@Devolicious\OhDearAppHealthBundle\Store\RequestStore'
+            - '%oh_dear_app_health.expiration_threshold%'
 
     Devolicious\OhDearAppHealthBundle\Store\CachePoolStore:
         arguments:
