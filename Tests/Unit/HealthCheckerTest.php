@@ -29,7 +29,7 @@ final class HealthCheckerTest extends TestCase
     {
         $this->resultStore = $this->createMock(ResultStore::class);
         $this->checker = $this->createMock(CheckerInterface::class);
-        $this->healthChecker = new HealthChecker($this->resultStore);
+        $this->healthChecker = new HealthChecker($this->resultStore, 60);
         $this->healthChecker->addHealthChecker($this->checker);
     }
 
