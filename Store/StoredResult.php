@@ -20,8 +20,8 @@ final class StoredResult
         $this->createdAt = new DateTimeImmutable();
     }
 
-    public function isExpired(int $frequency): bool
+    public function isExpired(int $frequency, int $threshold): bool
     {
-        return $this->createdAt->getTimestamp() + $frequency < time();
+        return ($this->createdAt->getTimestamp() + $frequency + $threshold) < time();
     }
 }

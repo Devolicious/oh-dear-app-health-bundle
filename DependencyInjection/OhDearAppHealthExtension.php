@@ -24,6 +24,11 @@ final class OhDearAppHealthExtension extends Extension
             $config['secret']
         );
 
+        $container->setParameter(
+            'oh_dear_app_health.expiration_threshold',
+            $config['expiration_threshold']
+        );
+
         $yamlLoader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $yamlLoader->load('services.yaml');
     }
