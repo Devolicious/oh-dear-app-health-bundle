@@ -11,6 +11,8 @@ use Devolicious\OhDearAppHealthBundle\Store\StoredResult;
 use OhDear\HealthCheckResults\CheckResult;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
+use Symfony\Component\Clock\ClockInterface;
+use Symfony\Component\Clock\MockClock;
 
 final class HealthCheckerTest extends TestCase
 {
@@ -25,11 +27,15 @@ final class HealthCheckerTest extends TestCase
     /** @phpstan-ignore-next-line */
     private HealthChecker $healthChecker;
 
+    /** @phpstan-ignore-next-line */
+    private ClockInterface $clock;
+
     protected function setUp(): void
     {
+        $this->clock = new MockClock();
         $this->resultStore = $this->createMock(ResultStore::class);
         $this->checker = $this->createMock(CheckerInterface::class);
-        $this->healthChecker = new HealthChecker($this->resultStore, 60);
+        $this->healthChecker = new HealthChecker($this->resultStore, 60, $this->clock);
         $this->healthChecker->addHealthChecker($this->checker);
     }
 
@@ -264,6 +270,7 @@ final class HealthCheckerTest extends TestCase
      */
     public function run_all_checks_and_store_with_cache_expired(): void
     {
+        $this->clock->modify('-1 hour');
         $checkResult = $this->createMock(CheckResult::class);
         $storedResult = new StoredResult('identifier', $checkResult);
 
@@ -275,7 +282,7 @@ final class HealthCheckerTest extends TestCase
         $this->checker
             ->expects($this->exactly(1))
             ->method('frequency')
-            ->willReturn(-1);
+            ->willReturn(60);
 
         $this->checker
             ->expects($this->once())
@@ -295,7 +302,6 @@ final class HealthCheckerTest extends TestCase
     public function run_all_checks_and_store_with_no_cache(): void
     {
         $checkResult = $this->createMock(CheckResult::class);
-        $storedResult = new StoredResult('identifier', $checkResult);
 
         $this->resultStore
             ->expects($this->once())
