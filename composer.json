@@ -27,7 +27,8 @@
         "phpunit/phpunit": "^9.0",
         "phpunit/php-code-coverage": "^9.0",
         "symfony/phpunit-bridge": "^6.3",
-        "doctrine/orm": "^2.16"
+        "doctrine/orm": "^2.16",
+        "symfony/clock": "^6.4"
     },
     "config": {
         "allow-plugins": {

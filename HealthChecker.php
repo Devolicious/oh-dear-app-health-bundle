@@ -10,6 +10,7 @@ use Devolicious\OhDearAppHealthBundle\Store\ResultStore;
 use Devolicious\OhDearAppHealthBundle\Store\StoredResult;
 use OhDear\HealthCheckResults\CheckResult;
 use OhDear\HealthCheckResults\CheckResults;
+use Symfony\Component\Clock\ClockInterface;
 
 final class HealthChecker implements HealthCheckerInterface
 {
@@ -19,6 +20,7 @@ final class HealthChecker implements HealthCheckerInterface
     public function __construct(
         private readonly ResultStore $resultStore,
         private readonly int $expirationThreshold,
+        private readonly ClockInterface $clock,
     ) {
     }
 

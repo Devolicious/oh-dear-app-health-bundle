@@ -6,8 +6,7 @@ namespace Devolicious\OhDearAppHealthBundle\Store;
 
 use DateTimeImmutable;
 use OhDear\HealthCheckResults\CheckResult;
-
-use function time;
+use Symfony\Component\Clock\ClockInterface;
 
 final class StoredResult
 {
@@ -20,8 +19,8 @@ final class StoredResult
         $this->createdAt = new DateTimeImmutable();
     }
 
-    public function isExpired(int $frequency, int $threshold): bool
+    public function isExpired(int $frequency, int $threshold, ClockInterface $clock): bool
     {
-        return ($this->createdAt->getTimestamp() + $frequency + $threshold) < time();
+        return ($this->createdAt->getTimestamp() + $frequency + $threshold) < $clock->now();
     }
 }
